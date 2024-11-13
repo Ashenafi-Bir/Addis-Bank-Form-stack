@@ -36,14 +36,14 @@ const AdminFormCreator = () => {
     <div className="admin-form-creator">
       <h1>Admin Dashboard</h1>
       <div>
-        <button onClick={() => setActiveTab('create')}>Create Form</button>
-        <button onClick={() => setActiveTab('list')}>View All Forms</button>
-        {selectedFormId && <button onClick={() => setActiveTab('edit')}>Edit Form</button>}
+        <button onClick={() => setActiveTab('create')}>Create Questioner</button>
+        <button onClick={() => setActiveTab('list')}>View All Questioner</button>
+        {selectedFormId && <button onClick={() => setActiveTab('edit')}>Edit Questioner</button>}
       </div>
 
       {activeTab === 'create' && (
         <div className="form-container">
-          <h2>Create Form</h2>
+          <h2>Create Questioner </h2>
           <input 
             type="text" 
             placeholder="Form Title" 
@@ -82,7 +82,7 @@ const AdminFormCreator = () => {
             </div>
           ))}
           <button className="add-question-btn" onClick={addQuestion}>Add Question</button>
-          <button className="create-form-btn" onClick={handleCreateForm}>Create Form</button>
+          <button className="create-form-btn" onClick={handleCreateForm}>Create Questioner</button>
 
           {successMessage && <p className="success-message">{successMessage}</p>}
           {errorMessage && <p className="error-message">{errorMessage}</p>}
@@ -91,7 +91,7 @@ const AdminFormCreator = () => {
 
       {activeTab === 'list' && (
         <div>
-          <h2>All Forms</h2>
+          <h2>All Questioner</h2>
           <AdminFormList 
             onSelectForm={(formId) => {
               setSelectedFormId(formId);
@@ -103,7 +103,7 @@ const AdminFormCreator = () => {
 
       {activeTab === 'edit' && selectedFormId && (
         <div>
-          <h2>Edit Form</h2>
+          <h2>Edit Questioner</h2>
           <AdminFormEditor formId={selectedFormId} />
         </div>
       )}

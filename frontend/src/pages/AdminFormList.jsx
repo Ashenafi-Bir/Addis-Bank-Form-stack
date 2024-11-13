@@ -50,14 +50,14 @@ const AdminFormList = ({ onSelectForm }) => {
     return (
         <div className="admin-form-list">
             {errorMessage && <p className="error-message">{errorMessage}</p>}
-            <h1 className="form-list-title">Form List</h1>
+            <h1 className="form-list-title">Questioners List</h1>
             <ul className="form-list">
                 {forms.map((form) => (
                     <li key={form.id} className="form-list-item">
                         <div className="form-item-content">
                             <p className="form-title">{form.title}</p>
-                            <button className="edit-form-btn" onClick={() => onSelectForm(form.id)}>Edit Form</button>
-                            <button className="delete-form-btn" onClick={() => handleDeleteForm(form.id)}>Delete Form</button>
+                            <button className="edit-form-btn" onClick={() => onSelectForm(form.id)}>Edit</button>
+                            <button className="delete-form-btn" onClick={() => handleDeleteForm(form.id)}>Delete </button>
 
                             {/* Generate Link Button */}
                             <div className="generate-link">

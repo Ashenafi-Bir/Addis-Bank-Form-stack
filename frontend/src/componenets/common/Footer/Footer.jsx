@@ -7,7 +7,7 @@ function Footer() {
       <div className="footer-container">
         <div className="footer-section">
           <h2>Addis Bank</h2>
-          <p>Form Stack System</p>
+          <p>Questioner Stack System</p>
         </div>
         {/* <div className="footer-section">
           <h3>Quick Links</h3>

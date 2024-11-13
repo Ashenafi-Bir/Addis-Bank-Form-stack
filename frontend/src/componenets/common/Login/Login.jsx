@@ -28,7 +28,7 @@ function Login() {
           <img src={logo} alt="Company Logo" />
           <div className='tit'>
             <h1>Addis Bank S.C</h1>
-            <h2>Form Stack System</h2>
+            <h2>Questioner Stack System</h2>
           </div>
         </div>
 

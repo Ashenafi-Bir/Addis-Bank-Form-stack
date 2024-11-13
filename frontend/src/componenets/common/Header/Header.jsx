@@ -21,7 +21,7 @@ function Header() {
         <Link to="/manage">
           <img src={logo} alt="Addis Bank" className="footer-logo" />
         </Link>
-        <h1>Addis Bank Form Stack </h1>
+        <h1>Addis Bank Questioner Stack </h1>
       </div>
       
       {/* Add Logout button */}
