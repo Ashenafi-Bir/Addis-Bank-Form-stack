@@ -1,0 +1,124 @@
+/* Overall Container */
+.admin-form-editor {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Title and Heading */
+  .admin-form-editor h1 {
+    color: #333;
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  /* Form container */
+  .admin-form-editor .form-container {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .admin-form-editor label {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    display: block;
+    font-weight: bold;
+  }
+  
+  .admin-form-editor input, 
+  .admin-form-editor select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .admin-form-editor button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+  }
+  
+  .admin-form-editor button:hover {
+    background-color: #2980b9;
+  }
+  
+  .admin-form-editor button:disabled {
+    background-color: #7f8c8d;
+    cursor: not-allowed;
+  }
+  
+  .admin-form-editor .add-question-btn {
+    background-color: #2ecc71;
+  }
+  
+  .admin-form-editor .create-form-btn {
+    background-color: #f39c12;
+  }
+  
+  /* Error and Success Messages */
+  .admin-form-editor p {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  
+  .admin-form-editor .success-message {
+    color: green;
+  }
+  
+  .admin-form-editor .error-message {
+    color: red;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .admin-form-editor {
+      padding: 15px;
+    }
+  
+    .admin-form-editor h1 {
+      font-size: 2rem;
+    }
+  
+    .admin-form-editor .form-container {
+      padding: 15px;
+    }
+  
+    .admin-form-editor input, 
+    .admin-form-editor select {
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .admin-form-editor h1 {
+      font-size: 1.8rem;
+    }
+  
+    .admin-form-editor label {
+      font-size: 1rem;
+    }
+  
+    .admin-form-editor button {
+      padding: 8px 16px;
+      font-size: 0.9rem;
+    }
+  
+    .admin-form-editor input, 
+    .admin-form-editor select {
+      font-size: 0.8rem;
+    }
+  }
+  

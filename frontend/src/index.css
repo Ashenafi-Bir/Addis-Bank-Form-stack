@@ -1,0 +1,185 @@
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=TBWA+Grotesk:wght@400;700&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet');
+html{
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%; 
+}
+body {
+  overflow-x: hidden;
+  
+}
+body::-webkit-scrollbar {
+  width: 0px;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* font-family: "Ubuntu",'Lato','TBWA Grotesk', sans-serif; */
+  font-family:'Lato', 'TBWA Grotesk', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  list-style: none;
+}
+
+:root{
+  
+  /* --primary-color: #088cdf; */
+
+  /* --secondary-color:#f1ff0c; */
+  /* --primary-color: #3d449c;
+  --secondary-color:rgb(222, 192, 36); */
+
+  --primary-color: #2674b6;
+  --secondary-color:#fdda26;
+
+  --light-dark-color:rgb(99, 116, 126);
+  --dark-heading:rgb(65, 78, 87);
+  --default-padding:50px;
+  --heading-size:42px;
+  --large-line-height:50px;
+  --h1-font-size:24px;
+
+  /* Custom Properties */
+  --primary-color-700:hsl(207, 65%, 43%);
+  --secondary-color-700:hsl(50, 98%, 57%);
+  --accent-color-700:hsl(202, 12%, 44%);
+  --fourth-color-700:hsl(204, 8%, 25%);
+  
+
+  --font-weight-300:300;
+  --font-weight-500:500;
+  --font-weight-700:700;
+  --font-weight-900:900;
+
+  --padding-vsm: 0.5rem;
+  --padding-sm:0.7rem;
+  --padding-md:1rem;
+  --padding-lg:1.5rem;
+  --padding-20px:2rem;
+  --padding-30px:3rem;
+  --padding-40px:4rem;
+  --padding-50px:5rem;
+  --padding-100Px:10rem;
+  --padding-150Px:15rem;
+
+  --margin-vsm: 0.5rem;
+  --margin-sm:0.7rem;
+  --margin-md:1rem;
+  --margin-lg:1.5rem;
+  --margin-20px:2rem;
+  --margin-30px:3rem;
+  --margin-40px:4rem;
+  --margin-50px:5rem;
+  --margin-100Px:10rem;
+  --margin-150px:15rem;
+
+
+  --font-size-sm:1.3rem;
+  --font-size-normal:1.6rem;
+  --font-size-md:1.8rem;
+  --font-size-lg:2rem;
+  --font-size-xlg: 2.5rem;
+  --font-size-xxlg:3.5rem;
+
+  --rectangle-border-radius:0.7rem;
+  --oval-border-radius:1.8rem;
+}
+
+/* body{
+  background-color: rgb(255, 255, 255);
+} */
+.container{
+    /* background-color: #fff; */
+    padding: 0 50px;
+}
+a{
+  text-decoration: none;
+}
+.section{
+  margin: 25px 0;
+}
+.blur-my-body {
+  filter: blur(5px);
+}
+.my-body{
+  margin-top: 85px;
+  padding-top: 10px;
+}
+
+#particles canvas{
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+
+
+.my-body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.my-body {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* 
+
+@media (max-width: 1024px) {
+  :root{
+
+    --primary-color-700:hsl(207, 65%, 43%);
+    --secondary-color-700:hsl(50, 98%, 57%);
+    --accent-color-700:hsl(202, 12%, 44%);
+    --fourth-color-700:hsl(204, 8%, 25%);
+    
+  
+    --font-weight-300:300;
+    --font-weight-500:500;
+    --font-weight-700:700;
+    --font-weight-900:900;
+  
+    --padding-vsm: 0.3rem;
+    --padding-sm:0.5rem;
+    --padding-md:0.8rem;
+    --padding-lg:1.3rem;
+    --padding-20px:1.8rem;
+    --padding-30px:2.8rem;
+    --padding-40px:3.8rem;
+    --padding-50px:4.8rem;
+    --padding-100Px:9.8rem;
+    --padding-150Px:14.8rem;
+  
+    --margin-vsm: 0.3rem;
+    --margin-sm:0.5rem;
+    --margin-md:0.8rem;
+    --margin-lg:1.3rem;
+    --margin-20px:1.8rem;
+    --margin-30px:2.8rem;
+    --margin-40px:3.8rem;
+    --margin-50px:4.8rem;
+    --margin-100Px:9.8rem;
+    --margin-150Px:14.8rem;
+  
+  
+    --font-size-sm:1.3rem;
+    --font-size-normal:1.5rem;
+    --font-size-md:1.7rem;
+    --font-size-lg:1.8rem;
+    --font-size-xlg: 2.4rem;
+    --font-size-xxlg:3.4rem;
+  
+    --rectangle-border-radius:0.7rem;
+    --oval-border-radius:1.8rem;
+  }
+} */

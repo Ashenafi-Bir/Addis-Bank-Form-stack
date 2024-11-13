@@ -1,0 +1,173 @@
+/* General reset and base styles */
+
+
+
+
+
+/* Form Container */
+.form-container1 {
+    border: 2px solid var(--primary-color);
+    width: 100%;
+    max-width: 900px;
+    padding: 2rem;
+    margin-top: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px 20%;
+}
+
+/* Heading styles */
+.form-container1 h2 {
+    text-align: center;
+    margin-bottom: 1.6rem;
+    color: #4f5d73;
+    font-size: 1.9rem;
+}
+
+/* Label styles */
+.form-container1 label {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+/* Input and Textarea styles */
+.form-container1 input[type="text"],
+.form-container1 input[type="radio"],
+.form-container1 input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.form-container1 input[type="text"] {
+    width: 100%;
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    margin-left: 1rem;
+
+}
+
+.form-container1 input[type="text"]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+/* Radio button and Checkbox styles */
+.form-container1 input[type="radio"],
+.form-container1 input[type="checkbox"] {
+    margin: 0.5rem 0.5rem 1rem 0;
+}
+
+/* Question options container */
+.form-container1 div {
+    margin-bottom: 2rem;
+}
+
+/* Button styles */
+.form-container1 button {
+    background-color:var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    display: block;
+    margin-top: 1rem;
+}
+
+.form-container1 button:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .form-container1 {
+        padding: 1.5rem;
+        width: 90%;
+    }
+
+    .form-container1 label,
+    .form-container1 input[type="text"] {
+        font-size: 1rem;
+    }
+
+    .form-container1 button {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container1 {
+        padding: 1rem;
+    }
+
+    .form-container1 h2 {
+        font-size: 1.5rem;
+    }
+
+    .form-container1 label {
+        font-size: 1rem;
+    }
+
+    .form-container1 input[type="text"] {
+        font-size: 1rem;
+    }
+
+    .form-container1 button {
+        font-size: 1rem;
+    }
+}
+ .success-message{
+    height: 80vh;
+margin-top: 100px;
+margin-left: 300px;
+font-size: 2.5rem;
+color: var(--primary-color);
+}
+.form-container1 .form-description {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+    text-align: justify;
+}
+
+/* Container for radio and checkbox options to display in rows */
+.options-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Create two columns */
+    gap: 0.2rem; /* Adds space between the options */
+    flex-wrap: wrap; /* Ensures wrapping when there are more than two items */
+}
+
+/* Ensures each option's label is vertically aligned */
+.option-label {
+    display: inline-block;
+ /* Add spacing below the labels */
+}
+
+/* Makes radio and checkbox inputs inline with the label */
+.form-container1 input[type="radio"],
+.form-container1 input[type="checkbox"] {
+    margin-right: 0.6rem; /* Adds space between input and label */
+    vertical-align: middle; /* Ensures the input aligns with the text */
+}
+
+/* Ensures each row wraps correctly */
+@media (max-width: 768px) {
+    .options-row {
+        grid-template-columns: 1fr; /* Stacks options in one column for smaller screens */
+    }
+}
+.form-container1 label {
+    display: block; /* Ensure label takes the full width */
+    margin-bottom: 1rem; /* Adds 2rem space between the label and the options */
+}

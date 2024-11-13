@@ -1,0 +1,152 @@
+/* Overall Container */
+.admin-form-creator {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Title and Heading */
+  .admin-form-creator h1, 
+  .admin-form-creator h2 {
+    color: #333;
+    text-align: center;
+  }
+  
+  .admin-form-creator h1 {
+    font-size: 2.9rem;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+  }
+  
+  .admin-form-creator h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+  
+  /* Buttons for tabs */
+  .admin-form-creator button {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 1.3rem;
+    transition: background-color 0.3s;
+  }
+  
+  .admin-form-creator button:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+  }
+  
+  .admin-form-creator button:disabled {
+    background-color: #7f8c8d;
+    cursor: not-allowed;
+  }
+  
+  /* Form container */
+  .admin-form-creator .form-container {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .admin-form-creator input, 
+  .admin-form-creator select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .admin-form-creator input[type="text"] {
+    max-width: 600px;
+    margin-bottom: 15px;
+  }
+  
+  .admin-form-creator textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.4rem;
+  }
+  
+  .admin-form-creator button.add-question-btn {
+    background-color: var(--secondary-color);
+    margin-top: 10px;
+    color: var(--primary-color);
+  }
+  
+  .admin-form-creator button.create-form-btn {
+    background-color: var(--primary-color);
+    margin-top: 20px;
+  }
+  
+  /* Error and Success Messages */
+  .admin-form-creator p {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  
+  .admin-form-creator .success-message {
+    color: green;
+  }
+  
+  .admin-form-creator .error-message {
+    color: red;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .admin-form-creator {
+      padding: 15px;
+    }
+  
+    .admin-form-creator h1 {
+      font-size: 2rem;
+    }
+  
+    .admin-form-creator h2 {
+      font-size: 1.6rem;
+    }
+  
+    .admin-form-creator .form-container {
+      padding: 15px;
+    }
+  
+    .admin-form-creator input, 
+    .admin-form-creator select, 
+    .admin-form-creator textarea {
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .admin-form-creator h1 {
+      font-size: 1.8rem;
+    }
+  
+    .admin-form-creator h2 {
+      font-size: 1.4rem;
+    }
+  
+    .admin-form-creator button {
+      padding: 8px 16px;
+      font-size: 0.9rem;
+    }
+  
+    .admin-form-creator input, 
+    .admin-form-creator select, 
+    .admin-form-creator textarea {
+      font-size: 0.8rem;
+    }
+  }
+  

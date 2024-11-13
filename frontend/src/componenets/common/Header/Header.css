@@ -1,0 +1,75 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: var(--primary-color); /* Dark blue background */
+    color: var(--secondary-color);
+  }
+  
+  .header .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header .logo img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .header .logo h1 {
+    font-size: 2.3rem;
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .header .login-button1 {
+    background-color: var(--secondary-color); /* Gold button */
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    color:var(--primary-color);
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .header .login-button1:hover {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+  }
+  
+
+  /* Example CSS for the Logout button */
+.logout-button {
+  background-color: var(--secondary-color); /* Red color for logout button */
+  color: var(--primary-color);
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 20px;
+  border-radius: 20px;
+}
+
+.logout-button:hover {
+  background-color: var(--primary-color);
+  color: var(--secondary-color); /* Darker red when hovering */
+}
+
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .header .logo h1 {
+      font-size: 1.2rem;
+    }
+    
+    .header .login-button1 {
+      align-self: flex-end;
+      margin-top: 10px;
+    }
+  }
+  
