@@ -4,10 +4,12 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING, 
             allowNull: false 
         },
-        description: { // Add the description field
+        description: { 
             type: DataTypes.TEXT, 
-            allowNull: true // description can be optional
+            allowNull: true 
         }
+    }, {
+        timestamps: true,
     });
     return Form;
 };

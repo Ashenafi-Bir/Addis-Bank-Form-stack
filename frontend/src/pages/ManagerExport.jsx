@@ -1,7 +1,5 @@
-// components/ManagerExport.js
-
 import React, { useState } from 'react';
-import { fetchFormDetails, fetchCsvData, exportCsv } from '../services/formExportService'; // Import service functions
+import axios from 'axios';
 import './ManagerExport.css';
 
 const ManagerExport = () => {
@@ -11,55 +9,58 @@ const ManagerExport = () => {
     const [isDetailsVisible, setIsDetailsVisible] = useState(false);
 
     // Fetch Form Details and Preview CSV Data
-    const fetchDetails = async () => {
+    const fetchFormDetails = async () => {
         if (!formId) {
-            alert('Please enter a Form ID.');
+            alert("Please enter a Form ID.");
             return;
         }
 
-        // Fetch form details
-        const formDetailsResult = await fetchFormDetails(formId);
-        if (formDetailsResult.success) {
-            setFormDetails(formDetailsResult.formDetails);
+        try {
+            const formDetailsResponse = await axios.get(`http://localhost:5000/api/forms/${formId}`);
+            setFormDetails(formDetailsResponse.data);
 
-            // Fetch CSV data
-            const csvResult = await fetchCsvData(formId);
-            if (csvResult.success) {
-                const reader = new FileReader();
-                reader.onload = function (event) {
-                    const textDecoder = new TextDecoder('utf-8');
-                    const csv = textDecoder.decode(event.target.result);
-                    const rows = csv.split('\n').map((row) => row.split(','));
-                    setCsvData(rows);
-                };
-                reader.readAsArrayBuffer(csvResult.data);
-                setIsDetailsVisible(true);
-            } else {
-                alert(csvResult.message);
-            }
-        } else {
-            alert(formDetailsResult.message);
+            const response = await axios.get(`http://localhost:5000/api/responses/export/${formId}`, {
+                responseType: 'blob'
+            });
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const textDecoder = new TextDecoder('utf-8');
+                const csv = textDecoder.decode(event.target.result);
+                const rows = csv.split('\n').map(row => row.split(','));
+                setCsvData(rows);
+            };
+            reader.readAsArrayBuffer(response.data);
+
+            setIsDetailsVisible(true);
+        } catch (error) {
+            alert("Failed to fetch form details. Please try again.");
+            console.error("Error fetching form details:", error);
         }
     };
 
     // Handle Export Action
     const handleExport = async () => {
         if (!formId) {
-            alert('Please enter a Form ID.');
+            alert("Please enter a Form ID.");
             return;
         }
 
-        const exportResult = await exportCsv(formId);
-        if (exportResult.success) {
-            const url = window.URL.createObjectURL(new Blob([exportResult.data]));
+        try {
+            const response = await axios.get(`http://localhost:5000/api/responses/export/${formId}`, {
+                responseType: 'blob'
+            });
+
+            const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement('a');
             link.href = url;
             link.setAttribute('download', `form_${formId}_responses.csv`);
             document.body.appendChild(link);
             link.click();
             link.remove();
-        } else {
-            alert(exportResult.message || 'Error exporting data.');
+        } catch (error) {
+            alert("Error exporting data.");
+            console.error("Error exporting data:", error);
         }
     };
 
@@ -77,21 +78,14 @@ const ManagerExport = () => {
                 />
             </div>
 
-            {/* View Details Button */}
-            <button onClick={fetchDetails}>View Form Details</button>
+            <button onClick={fetchFormDetails}>View Form Details</button>
 
             {isDetailsVisible && formDetails && (
                 <div className="form-details">
                     <h3>Form Details</h3>
-                    <p className="strong">
-                        <strong>Title:</strong> {formDetails.title}
-                    </p>
-                    <p>
-                        <strong>Number of Questions:</strong> {formDetails.questions.length}
-                    </p>
-                    <p>
-                        <strong>Created At:</strong> {new Date(formDetails.createdAt).toLocaleDateString()}
-                    </p>
+                    <p><strong>Title:</strong> {formDetails.title}</p>
+                    <p><strong>Number of Questions:</strong> {formDetails.questions.length}</p>
+                    <p><strong>Created At:</strong> {new Date(formDetails.createdAt).toLocaleDateString()}</p>
                 </div>
             )}
 
@@ -119,7 +113,6 @@ const ManagerExport = () => {
                 </div>
             )}
 
-            {/* Export Button */}
             {isDetailsVisible && <button onClick={handleExport}>Export CSV</button>}
         </div>
     );

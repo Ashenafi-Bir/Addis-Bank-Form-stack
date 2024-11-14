@@ -1,8 +1,7 @@
-// components/UserForm.js
-
+// UserForm.js
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchFormDetails, submitFormResponse } from '../services/userFormService'; // Import service functions
+import axios from 'axios';
 import './UserForm.css';
 
 const UserForm = () => {
@@ -11,29 +10,12 @@ const UserForm = () => {
     const [responses, setResponses] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
 
-    // Check if the form has been recently submitted
+    // Fetch form data
     useEffect(() => {
-        const lastSubmission = localStorage.getItem(`form_${formId}_submitted`);
-        if (lastSubmission) {
-            const timeSinceSubmission = Date.now() - lastSubmission;
-            if (timeSinceSubmission < 2 * 60 * 1000) {
-                setIsSubmitted(true);
-            }
-        }
-
-        // Fetch the form data if it hasn't been submitted recently
-        if (!isSubmitted) {
-            const fetchDetails = async () => {
-                const result = await fetchFormDetails(formId);
-                if (result.success) {
-                    setForm(result.formDetails);
-                } else {
-                    console.error(result.message);
-                }
-            };
-            fetchDetails();
-        }
-    }, [formId, isSubmitted]);
+        axios.get(`http://localhost:5000/api/forms/${formId}`)
+            .then(response => setForm(response.data))
+            .catch(error => console.error("Error fetching form:", error));
+    }, [formId]);
 
     const handleChange = (questionId, value) => {
         setResponses({
@@ -44,38 +26,34 @@ const UserForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const result = await submitFormResponse(formId, responses);
-        if (result.success) {
-            alert('Form submitted successfully!');
-
-            // Save submission timestamp to block access for 2 minutes
-            localStorage.setItem(`form_${formId}_submitted`, Date.now());
+        try {
+            await axios.post(`http://localhost:5000/api/responses`, {
+                formId,
+                responses,
+            });
+            alert("Form submitted successfully!");
             setIsSubmitted(true);
-        } else {
-            alert(result.message || 'Error submitting form.');
+        } catch (error) {
+            console.error("Error submitting form:", error);
         }
     };
 
     if (isSubmitted) {
-        return <p className="success-message">Your form has been submitted successfully! </p>;
+        return <p className="success-message">Your form has been submitted successfully!</p>;
     }
 
     if (!form) return <p>Loading form...</p>;
 
     return (
-        <div className='container-me'>
+        <div className='container-me'> 
             <div className="form-container1">
                 <h2>{form.title}</h2>
-
-                {/* Display the description of the form */}
                 {form.description && <p className="form-description">{form.description}</p>}
-
                 <form onSubmit={handleSubmit}>
                     {form.questions.map((question) => (
                         <div key={question.id} className="question-container">
                             <label>{question.questionText}</label>
-                            {question.type === 'short' && (
+                            {question.type === "short" && (
                                 <input
                                     type="text"
                                     value={responses[question.id] || ''}
@@ -83,7 +61,7 @@ const UserForm = () => {
                                     required
                                 />
                             )}
-                            {question.type === 'radio' && (
+                            {question.type === "radio" && (
                                 <div className="options-row">
                                     {question.options.map((option, index) => (
                                         <label key={index} className="option-label">
@@ -100,7 +78,7 @@ const UserForm = () => {
                                     ))}
                                 </div>
                             )}
-                            {question.type === 'checkbox' && (
+                            {question.type === "checkbox" && (
                                 <div className="options-row">
                                     {question.options.map((option, index) => (
                                         <label key={index} className="option-label">

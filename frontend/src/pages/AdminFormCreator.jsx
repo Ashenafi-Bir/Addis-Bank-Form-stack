@@ -1,8 +1,10 @@
-// components/AdminFormCreator.js
+// AdminFormCreator.js
 import React, { useState } from 'react';
 import { createForm } from '../services/formService'; // Import createForm from formService
 import AdminFormList from './AdminFormList';
 import AdminFormEditor from './AdminFormEditor';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faEdit, faList, faFileAlt } from '@fortawesome/free-solid-svg-icons'; // Import relevant icons
 import './AdminFormCreator.css';  // Importing the CSS file
 
 const AdminFormCreator = () => {
@@ -36,22 +38,25 @@ const AdminFormCreator = () => {
     <div className="admin-form-creator">
       <h1>Admin Dashboard</h1>
       <div>
-        <button onClick={() => setActiveTab('create')}>Create Questioner</button>
-        <button onClick={() => setActiveTab('list')}>View All Questioner</button>
-        {selectedFormId && <button onClick={() => setActiveTab('edit')}>Edit Questioner</button>}
+        <button onClick={() => setActiveTab('create')}>
+          <FontAwesomeIcon icon={faFileAlt} /> Create Questioner
+        </button>
+        <button onClick={() => setActiveTab('list')}>
+          <FontAwesomeIcon icon={faList} /> View All Questioners
+        </button>
       </div>
 
       {activeTab === 'create' && (
         <div className="form-container">
-          <h2>Create Questioner </h2>
+          <h2>Create Questioner</h2>
           <input 
             type="text" 
-            placeholder="Form Title" 
+            placeholder="Questioners Title" 
             value={title} 
             onChange={e => setTitle(e.target.value)} 
           />
           <textarea 
-            placeholder="Form Description (optional)"
+            placeholder="Questioners Description (optional)"
             value={description}
             onChange={e => setDescription(e.target.value)} // Capture description
             rows="5"
@@ -81,8 +86,12 @@ const AdminFormCreator = () => {
               )}
             </div>
           ))}
-          <button className="add-question-btn" onClick={addQuestion}>Add Question</button>
-          <button className="create-form-btn" onClick={handleCreateForm}>Create Questioner</button>
+          <button className="add-question-btn" onClick={addQuestion}>
+            <FontAwesomeIcon icon={faPlus} /> Add Question
+          </button>
+          <button className="create-form-btn" onClick={handleCreateForm}>
+            <FontAwesomeIcon icon={faFileAlt} /> Create Questioner
+          </button>
 
           {successMessage && <p className="success-message">{successMessage}</p>}
           {errorMessage && <p className="error-message">{errorMessage}</p>}
@@ -91,7 +100,6 @@ const AdminFormCreator = () => {
 
       {activeTab === 'list' && (
         <div>
-          <h2>All Questioner</h2>
           <AdminFormList 
             onSelectForm={(formId) => {
               setSelectedFormId(formId);
@@ -103,7 +111,6 @@ const AdminFormCreator = () => {
 
       {activeTab === 'edit' && selectedFormId && (
         <div>
-          <h2>Edit Questioner</h2>
           <AdminFormEditor formId={selectedFormId} />
         </div>
       )}

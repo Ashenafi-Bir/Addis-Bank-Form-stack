@@ -1,20 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
-const rateLimit = require('express-rate-limit');
 const { Parser } = require('json2csv');
 const { v4: uuidv4 } = require('uuid');  
 
-// Middleware for rate-limiting by IP address
-const formSubmissionLimiter = rateLimit({
-    windowMs: 2 * 60 * 1000, // 2 minutes
-    max: 1, // Limit each IP to 1 submission per 2 minutes
-    message: "You can only submit once every 2 minutes. Please wait and try again.",
-});
-
 // Import uuid to generate unique submission IDs
 
-router.post('/', formSubmissionLimiter, async (req, res) => {
+router.post('/', async (req, res) => {  // Removed formSubmissionLimiter middleware
     const { formId, responses } = req.body;
     const submissionId = uuidv4();  // Generate a unique submission ID
 
@@ -33,16 +25,17 @@ router.post('/', formSubmissionLimiter, async (req, res) => {
     }
 });
 
-
+// Export responses as CSV with question headers and submission rows
 router.get('/export/:formId', async (req, res) => {
     const { formId } = req.params;
     try {
-        // Fetch all questions for the form to structure the header columns
+        // Fetch all questions for the form to use as headers
         const questions = await db.Question.findAll({
             where: { formId },
             attributes: ['id', 'questionText']
         });
 
+        // Create a map of question IDs to question texts (for CSV headers)
         const questionMap = questions.reduce((map, question) => {
             map[question.id] = question.questionText;
             return map;
@@ -50,40 +43,38 @@ router.get('/export/:formId', async (req, res) => {
 
         // Fetch all responses for the form
         const responses = await db.Response.findAll({
-            where: { formId }
+            where: { formId },
+            attributes: ['questionId', 'answer', 'createdAt']
         });
 
-        // Group responses by submissionId
-        const responseRows = {};
-        responses.forEach((response) => {
-            const { questionId, answer, submissionId } = response;
-            if (!responseRows[submissionId]) {
-                responseRows[submissionId] = {};
-            }
-            responseRows[submissionId][questionMap[questionId]] = answer;
+        // Group responses by submission time
+        const groupedResponses = {};
+        responses.forEach(response => {
+            const timestamp = response.createdAt.getTime();
+            if (!groupedResponses[timestamp]) groupedResponses[timestamp] = {};
+            groupedResponses[timestamp][questionMap[response.questionId]] = response.answer;
         });
 
-        // Convert response rows to array format with headers
-        const csvHeaders = questions.map(q => q.questionText);
-        const csvRows = Object.values(responseRows).map(row => 
-            csvHeaders.map(header => row[header] || "")
+        // Prepare CSV headers and rows
+        const csvHeaders = Object.values(questionMap);  // Question texts as headers
+        const csvRows = Object.values(groupedResponses).map(response =>
+            csvHeaders.map(header => response[header] || "")  // Fill each row with answers or empty strings
         );
 
-        // Add header as the first row
+        // Add headers as the first row
         csvRows.unshift(csvHeaders);
 
-        // Generate CSV
+        // Generate CSV data
         const csvParser = new Parser({ header: false, withBOM: true });
         const csvData = csvParser.parse(csvRows);
 
-        // Set UTF-8 encoding and response headers
+        // Send CSV file in response
         res.header('Content-Type', 'text/csv; charset=utf-8');
-        res.header('Content-Disposition', `attachment; filename=form_${formId}_responses.csv`);
+        res.attachment(`form_${formId}_responses.csv`);
         res.send(csvData);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
-
 
 module.exports = router;

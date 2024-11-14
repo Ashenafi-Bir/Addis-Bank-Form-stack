@@ -79,15 +79,26 @@
     font-size: 1.4rem;
   }
   
-  .admin-form-creator button.add-question-btn {
+  .admin-form-creator .add-question-btn {
     background-color: var(--secondary-color);
     margin-top: 10px;
     color: var(--primary-color);
   }
-  
-  .admin-form-creator button.create-form-btn {
+  .admin-form-creator .add-question-btn:hover {
     background-color: var(--primary-color);
+    color: var(--secondary-color);
+  }
+  
+  .admin-form-creator .create-form-btn {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
     margin-top: 20px;
+    margin-left: 400px;
+  }
+  .admin-form-creator .create-form-btn:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+   
   }
   
   /* Error and Success Messages */
@@ -149,4 +160,31 @@
       font-size: 0.8rem;
     }
   }
-  
+  /* AdminFormCreator.css */
+
+/* Button Styling */
+button {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+  font-size: 1.3rem;
+  transition: background-color 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px; /* Adds space between icon and text */
+}
+
+/* Hover and Active Button States */
+button:hover {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+button:disabled {
+  background-color: #7f8c8d;
+  cursor: not-allowed;
+}

@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { fetchForms, deleteForm } from '../services/formService';  // Import the service functions
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrashAlt, faLink, faCopy } from '@fortawesome/free-solid-svg-icons';  // Import icons
 import './AdminFormList.css';
 
 const AdminFormList = ({ onSelectForm }) => {
@@ -50,32 +52,36 @@ const AdminFormList = ({ onSelectForm }) => {
     return (
         <div className="admin-form-list">
             {errorMessage && <p className="error-message">{errorMessage}</p>}
-            <h1 className="form-list-title">Questioners List</h1>
+            <h1 className="form-list-title">All Questioners List</h1>
             <ul className="form-list">
-                {forms.map((form) => (
+                {forms.map((form, index) => (
                     <li key={form.id} className="form-list-item">
-                        <div className="form-item-content">
+                        {/* Row 1: Form Number, Title, and Buttons */}
+                        <div className="form-item-row">
+                            <span className="form-number">{index + 1}</span>
                             <p className="form-title">{form.title}</p>
-                            <button className="edit-form-btn" onClick={() => onSelectForm(form.id)}>Edit</button>
-                            <button className="delete-form-btn" onClick={() => handleDeleteForm(form.id)}>Delete </button>
-
-                            {/* Generate Link Button */}
-                            <div className="generate-link">
-                                <button className="generate-link-btn" onClick={() => handleGenerateLink(form.id)}>
-                                    Generate Link
+                            <div className="form-buttons">
+                                <button className="edit-form-btn" onClick={() => onSelectForm(form.id)}>
+                                    <FontAwesomeIcon icon={faEdit} /> Edit
                                 </button>
-
-                                {/* Show the generated link only when the button is clicked */}
-                                {linkVisible[form.id] && (
-                                    <div className="generated-link">
-                                        <span>{`${window.location.origin}/form/${form.id}`}</span>
-                                        <button className="copy-link-btn" onClick={() => handleCopyLink(form.id)}>
-                                            Copy Link
-                                        </button>
-                                    </div>
-                                )}
+                                <button className="delete-form-btn" onClick={() => handleDeleteForm(form.id)}>
+                                    <FontAwesomeIcon icon={faTrashAlt} /> Delete
+                                </button>
+                                <button className="generate-link-btn" onClick={() => handleGenerateLink(form.id)}>
+                                    <FontAwesomeIcon icon={faLink} /> Generate Link
+                                </button>
                             </div>
                         </div>
+
+                        {/* Row 2: Generated Link */}
+                        {linkVisible[form.id] && (
+                            <div className="generated-link-row">
+                                <span>{`${window.location.origin}/form/${form.id}`}</span>
+                                <button className="copy-link-btn" onClick={() => handleCopyLink(form.id)}>
+                                    <FontAwesomeIcon icon={faCopy} /> Copy Link
+                                </button>
+                            </div>
+                        )}
                     </li>
                 ))}
             </ul>

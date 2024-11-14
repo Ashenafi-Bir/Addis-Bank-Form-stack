@@ -91,4 +91,44 @@
       font-size: 14px;
     }
   }
-  
+  /* HomePage.css */
+
+/* Button Styling */
+.home-button {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  padding: 15px 30px;
+  text-decoration: none;
+  font-size: 18px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px; /* Space between the icon and text */
+}
+
+/* Hover and Active Button States */
+.home-button:hover {
+  background-color: #2f5e7e;
+  transform: scale(1.05);
+}
+
+.home-button:active {
+  transform: scale(1);
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .home-button {
+    padding: 12px 25px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}

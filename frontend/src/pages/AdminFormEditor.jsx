@@ -123,7 +123,7 @@ const AdminFormEditor = ({ formId }) => {
                             </>
                         )}
 
-                        <button onClick={() => deleteQuestionHandler(index)}>Delete Question</button>
+                        {/* <button onClick={() => deleteQuestionHandler(index)}>Delete Question</button> */}
                     </div>
                 ))}
 
