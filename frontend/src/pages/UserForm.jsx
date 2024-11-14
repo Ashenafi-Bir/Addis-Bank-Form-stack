@@ -1,7 +1,7 @@
 // UserForm.js
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import { fetchFormData, submitFormResponses } from '../services/formService';  // Import the service functions
 import './UserForm.css';
 
 const UserForm = () => {
@@ -12,8 +12,8 @@ const UserForm = () => {
 
     // Fetch form data
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/forms/${formId}`)
-            .then(response => setForm(response.data))
+        fetchFormData(formId)
+            .then(data => setForm(data))
             .catch(error => console.error("Error fetching form:", error));
     }, [formId]);
 
@@ -27,10 +27,7 @@ const UserForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(`http://localhost:5000/api/responses`, {
-                formId,
-                responses,
-            });
+            await submitFormResponses(formId, responses);
             alert("Form submitted successfully!");
             setIsSubmitted(true);
         } catch (error) {
@@ -50,9 +47,12 @@ const UserForm = () => {
                 <h2>{form.title}</h2>
                 {form.description && <p className="form-description">{form.description}</p>}
                 <form onSubmit={handleSubmit}>
-                    {form.questions.map((question) => (
+                    {form.questions.map((question, index) => (
                         <div key={question.id} className="question-container">
-                            <label>{question.questionText}</label>
+                            <label>
+                                <span className="question-number">{index + 1}.</span> {/* Display question number */}
+                                {question.questionText}
+                            </label>
                             {question.type === "short" && (
                                 <input
                                     type="text"

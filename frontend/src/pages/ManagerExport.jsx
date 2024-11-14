@@ -1,6 +1,6 @@
 // ManagerExport.js
 import React, { useState } from 'react';
-import axios from 'axios';
+import { fetchFormDetails, fetchFormResponsesCSV } from '../services/exportService'; // Import service functions
 import './ManagerExport.css';
 
 const ManagerExport = () => {
@@ -10,20 +10,17 @@ const ManagerExport = () => {
     const [isDetailsVisible, setIsDetailsVisible] = useState(false);
 
     // Fetch Form Details and Preview CSV Data
-    const fetchFormDetails = async () => {
+    const handleFetchFormDetails = async () => {
         if (!formId) {
             alert("Please enter a Form ID.");
             return;
         }
 
         try {
-            const formDetailsResponse = await axios.get(`http://localhost:5000/api/forms/${formId}`);
-            setFormDetails(formDetailsResponse.data);
+            const formDetailsResponse = await fetchFormDetails(formId);
+            setFormDetails(formDetailsResponse);
 
-            const response = await axios.get(`http://localhost:5000/api/responses/export/${formId}`, {
-                responseType: 'blob'
-            });
-
+            const response = await fetchFormResponsesCSV(formId);
             const reader = new FileReader();
             reader.onload = function(event) {
                 const textDecoder = new TextDecoder('utf-8');
@@ -31,7 +28,7 @@ const ManagerExport = () => {
                 const rows = csv.split('\n').map(row => row.split(','));
                 setCsvData(rows);
             };
-            reader.readAsArrayBuffer(response.data);
+            reader.readAsArrayBuffer(response);
 
             setIsDetailsVisible(true);
         } catch (error) {
@@ -48,11 +45,8 @@ const ManagerExport = () => {
         }
 
         try {
-            const response = await axios.get(`http://localhost:5000/api/responses/export/${formId}`, {
-                responseType: 'blob'
-            });
-
-            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const response = await fetchFormResponsesCSV(formId);
+            const url = window.URL.createObjectURL(new Blob([response]));
             const link = document.createElement('a');
             link.href = url;
             link.setAttribute('download', `form_${formId}_responses.csv`);
@@ -79,12 +73,12 @@ const ManagerExport = () => {
                 />
             </div>
 
-            <button onClick={fetchFormDetails}>View Form Details</button>
+            <button onClick={handleFetchFormDetails}>View Form Details</button>
 
             {isDetailsVisible && formDetails && (
                 <div className="form-details">
                     <h3>Form Details</h3>
-                    <p className='tit'><strong >Title:</strong> {formDetails.title}</p>
+                    <p className='tit'><strong>Title:</strong> {formDetails.title}</p>
                     <p><strong>Number of Questions:</strong> {formDetails.questions.length}</p>
                     <p className='crt'><strong>Created At:</strong> {new Date(formDetails.createdAt).toLocaleDateString()}</p>
                 </div>

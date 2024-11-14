@@ -76,3 +76,23 @@ export const fetchForms = async () => {
       return { success: false, message: 'Failed to delete form.' };
     }
   };
+
+  // Function to fetch form data by formId
+export const fetchFormData = (formId) => {
+  return axios.get(`${BASE_URL}/api/forms/${formId}`)
+    .then(response => response.data)
+    .catch(error => {
+      console.error('Error fetching form:', error);
+      throw error;
+    });
+};
+
+// Function to submit form responses
+export const submitFormResponses = (formId, responses) => {
+  return axios.post(`${BASE_URL}/api/responses`, { formId, responses })
+    .then(response => response.data)
+    .catch(error => {
+      console.error('Error submitting form:', error);
+      throw error;
+    });
+};

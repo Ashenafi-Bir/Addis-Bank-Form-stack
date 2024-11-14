@@ -171,3 +171,26 @@ color: var(--primary-color);
     display: block; /* Ensure label takes the full width */
     margin-bottom: 1rem; /* Adds 2rem space between the label and the options */
 }
+/* UserForm.css */
+
+/* Style the question number */
+.question-number {
+    font-weight: bold;
+    color: var(--primary-color); /* Customize this color as needed */
+    margin-right: 8px;
+    font-size: 1.3rem; /* Adjust the size as needed */
+}
+
+/* Adjust other styles for question labels */
+.form-container1 label {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    display: block;
+    margin-top: 1rem; /* Adds spacing above the question */
+}
+
+/* Add spacing between question and input fields */
+.question-container {
+    margin-bottom: 2rem;
+}
