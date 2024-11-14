@@ -50,26 +50,38 @@
   /* Form container */
   .admin-form-creator .form-container {
     background-color: #f9f9f9;
-    padding: 20px;
+    padding: 100px;
     border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 8px rgba(2, 115, 160, 0.1);
   }
+ 
   
-  .admin-form-creator input, 
   .admin-form-creator select {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid #ccc;
+    border: 1px solid var(--primary-color);
     border-radius: 5px;
-    font-size: 1rem;
+    font-size: 1.2rem;
+    max-width: fit-content;
+  }
+  .admin-form-creator input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    font-size: 1.2rem;
   }
   
   .admin-form-creator input[type="text"] {
     max-width: 600px;
     margin-bottom: 15px;
   }
-  
+  .admin-form-creator .form-container .title {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+     }
   .admin-form-creator textarea {
     width: 100%;
     padding: 10px;
@@ -77,6 +89,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1.4rem;
+    max-width: 70%;
   }
   
   .admin-form-creator .add-question-btn {

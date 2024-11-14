@@ -8,21 +8,21 @@ async function initializeUsers() {
     await sequelize.sync();
 
     // Hash the passwords before saving
-    const hashedPassword1 = await bcrypt.hash('password1', 10);
-    const hashedPassword2 = await bcrypt.hash('password2', 10);
+    const hashedPassword1 = await bcrypt.hash('Adiss@12', 10);
+    const hashedPassword2 = await bcrypt.hash('Adiss@13', 10);
 
     // Create users
     await User.bulkCreate([
       {
         firstName: 'Admin1',
-        lastName: 'One1',
-        username: 'admin12',
+        lastName: 'One',
+        username: 'admin1',
         password: hashedPassword1,
       },
       {
         firstName: 'Admin2',
         lastName: 'Two2',
-        username: 'admin21',
+        username: 'admin2',
         password: hashedPassword2,
       },
     ]);

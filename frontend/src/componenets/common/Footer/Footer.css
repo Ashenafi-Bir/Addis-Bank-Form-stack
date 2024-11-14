@@ -31,7 +31,7 @@
   /* Heading styling */
   .footer h2, .footer h3 {
     margin-bottom: 10px;
-    font-size: 18px;
+    font-size: 1.8rem;
     font-weight: bold;
   }
   
@@ -58,6 +58,7 @@
   /* Contact info styling */
   .footer p {
     margin: 5px 0;
+    font-size: 1.1rem;
   }
   
   /* Footer bottom bar */

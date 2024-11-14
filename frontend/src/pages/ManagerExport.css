@@ -123,6 +123,41 @@
 .manager-export .csv-table tr:hover {
     background-color: #ddd;
 }
+/* CSV Table Container */
+.manager-export .csv-table-container {
+    margin-top: 30px;
+    overflow-x: auto; /* Enables horizontal scrolling */
+    max-width: 100%; /* Constrains the container to fit the viewport */
+    padding: 0 10px; /* Adds padding for better alignment on small screens */
+}
+
+.manager-export .csv-table {
+    width: 100%; /* Ensures table takes up the full container width */
+    min-width: 600px; /* Sets a minimum width to trigger horizontal scroll on small screens */
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* Table Cells and Headers */
+.manager-export .csv-table th,
+.manager-export .csv-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+.manager-export .csv-table th {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.manager-export .csv-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.manager-export .csv-table tr:hover {
+    background-color: #ddd;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -155,4 +190,23 @@
         font-size: 0.8rem;
         padding: 8px;
     }
+}
+/* Icon Styling for Input Fields */
+.input-with-icon {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    right: 10px;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    pointer-events: none;
+}
+
+/* Button Icon Styling */
+.manager-export button .fa-icon {
+    margin-right: 8px;
 }

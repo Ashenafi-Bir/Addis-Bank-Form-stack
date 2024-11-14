@@ -1,6 +1,8 @@
 // ManagerExport.js
 import React, { useState } from 'react';
-import { fetchFormDetails, fetchFormResponsesCSV } from '../services/exportService'; // Import service functions
+import { fetchFormDetails, fetchFormResponsesCSV } from '../services/exportService';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch, faDownload, faEye } from '@fortawesome/free-solid-svg-icons';
 import './ManagerExport.css';
 
 const ManagerExport = () => {
@@ -64,23 +66,28 @@ const ManagerExport = () => {
             <h2>Export Form Responses</h2>
             <div className="input-container">
                 <label htmlFor="formId">Form ID</label>
-                <input
-                    type="text"
-                    id="formId"
-                    placeholder="Enter Form ID"
-                    value={formId}
-                    onChange={(e) => setFormId(e.target.value)}
-                />
+                <div className="input-with-icon">
+                    <input
+                        type="text"
+                        id="formId"
+                        placeholder="Enter Form ID"
+                        value={formId}
+                        onChange={(e) => setFormId(e.target.value)}
+                    />
+                    <FontAwesomeIcon icon={faSearch} className="input-icon" />
+                </div>
             </div>
 
-            <button onClick={handleFetchFormDetails}>View Form Details</button>
+            <button onClick={handleFetchFormDetails}>
+                <FontAwesomeIcon icon={faEye} /> View Form Details
+            </button>
 
             {isDetailsVisible && formDetails && (
                 <div className="form-details">
                     <h3>Form Details</h3>
-                    <p className='tit'><strong>Title:</strong> {formDetails.title}</p>
+                    <p className="tit"><strong>Title:</strong> {formDetails.title}</p>
                     <p><strong>Number of Questions:</strong> {formDetails.questions.length}</p>
-                    <p className='crt'><strong>Created At:</strong> {new Date(formDetails.createdAt).toLocaleDateString()}</p>
+                    <p className="crt"><strong>Created At:</strong> {new Date(formDetails.createdAt).toLocaleDateString()}</p>
                 </div>
             )}
 
@@ -108,7 +115,11 @@ const ManagerExport = () => {
                 </div>
             )}
 
-            {isDetailsVisible && <button onClick={handleExport}>Export CSV</button>}
+            {isDetailsVisible && (
+                <button onClick={handleExport}>
+                    <FontAwesomeIcon icon={faDownload} /> Export CSV
+                </button>
+            )}
         </div>
     );
 };

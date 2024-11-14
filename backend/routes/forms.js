@@ -17,17 +17,21 @@ router.post('/', async (req, res) => {
                 questionText: question.text,
                 type: question.type,
                 options: JSON.stringify(question.options),
+                subDescription: question.subDescription || null,  // Ensure subDescription is saved
             });
         }));
 
+        // Fetch the form with its associated questions
         const formWithQuestions = await db.Form.findByPk(form.id, {
             include: [{ model: db.Question, as: 'questions' }]
         });
 
+        // Parse the options for each question if they exist
         formWithQuestions.questions.forEach(q => {
             if (q.options) q.options = JSON.parse(q.options);
         });
 
+        // Respond with the form and associated questions
         res.status(201).json({ form: formWithQuestions });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -35,11 +39,12 @@ router.post('/', async (req, res) => {
 });
 
 
+
 // Get form with questions by ID
 router.get('/:formId', async (req, res) => {
     const { formId } = req.params;
     try {
-        // Fetch form with associated questions
+        // Fetch form with associated questions including subdescription
         const form = await db.Form.findByPk(formId, {
             include: [{ model: db.Question, as: 'questions' }],
         });
@@ -60,11 +65,9 @@ router.get('/:formId', async (req, res) => {
         // Return the form along with its questions
         res.json(form);
     } catch (error) {
-        // Handle any errors that occur during the query
         res.status(500).json({ error: error.message });
     }
 });
-
 
 // Get all forms
 router.get('/', async (req, res) => {

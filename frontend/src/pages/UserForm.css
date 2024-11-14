@@ -194,3 +194,10 @@ color: var(--primary-color);
 .question-container {
     margin-bottom: 2rem;
 }
+/* UserForm.css */
+.subdescription {
+    font-style: italic;
+    color: #555;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}

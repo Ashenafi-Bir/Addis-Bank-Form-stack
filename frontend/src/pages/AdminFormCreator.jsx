@@ -25,7 +25,7 @@ const AdminFormCreator = () => {
       setCreatedForm(result.form);
       setTitle('');
       setDescription('');
-      setQuestions([{ text: '', type: 'short', options: [] }]);
+      setQuestions([{ text: '', type: 'short', options: [], subDescription: '' }]); // Reset questions
       setSuccessMessage('Form created successfully!');
       setErrorMessage('');
     } else {
@@ -49,7 +49,7 @@ const AdminFormCreator = () => {
       {activeTab === 'create' && (
         <div className="form-container">
           <h2>Create Questioner</h2>
-          <input 
+          <input className='title'
             type="text" 
             placeholder="Questioners Title" 
             value={title} 
@@ -63,7 +63,7 @@ const AdminFormCreator = () => {
           />
           {questions.map((q, index) => (
             <div key={index}>
-              <input
+              <input 
                 type="text"
                 placeholder="Question Text"
                 value={q.text}
@@ -119,3 +119,4 @@ const AdminFormCreator = () => {
 };
 
 export default AdminFormCreator;
+

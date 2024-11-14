@@ -1,7 +1,7 @@
 // UserForm.js
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchFormData, submitFormResponses } from '../services/formService';  // Import the service functions
+import { fetchFormData, submitFormResponses } from '../services/formService';
 import './UserForm.css';
 
 const UserForm = () => {
@@ -42,7 +42,7 @@ const UserForm = () => {
     if (!form) return <p>Loading form...</p>;
 
     return (
-        <div className='container-me'> 
+        <div className="container-me">
             <div className="form-container1">
                 <h2>{form.title}</h2>
                 {form.description && <p className="form-description">{form.description}</p>}
@@ -50,9 +50,15 @@ const UserForm = () => {
                     {form.questions.map((question, index) => (
                         <div key={question.id} className="question-container">
                             <label>
-                                <span className="question-number">{index + 1}.</span> {/* Display question number */}
+                                <span className="question-number">{index + 1}.</span>
                                 {question.questionText}
                             </label>
+                            
+                            {/* Display subdescription if available */}
+                            {question.subdescription && (
+                                <p className="subdescription">{question.subdescription}</p>
+                            )}
+
                             {question.type === "short" && (
                                 <input
                                     type="text"
@@ -61,6 +67,7 @@ const UserForm = () => {
                                     required
                                 />
                             )}
+
                             {question.type === "radio" && (
                                 <div className="options-row">
                                     {question.options.map((option, index) => (
@@ -78,6 +85,7 @@ const UserForm = () => {
                                     ))}
                                 </div>
                             )}
+
                             {question.type === "checkbox" && (
                                 <div className="options-row">
                                     {question.options.map((option, index) => (
