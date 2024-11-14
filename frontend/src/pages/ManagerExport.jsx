@@ -1,3 +1,4 @@
+// ManagerExport.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import './ManagerExport.css';
@@ -83,9 +84,9 @@ const ManagerExport = () => {
             {isDetailsVisible && formDetails && (
                 <div className="form-details">
                     <h3>Form Details</h3>
-                    <p><strong>Title:</strong> {formDetails.title}</p>
+                    <p className='tit'><strong >Title:</strong> {formDetails.title}</p>
                     <p><strong>Number of Questions:</strong> {formDetails.questions.length}</p>
-                    <p><strong>Created At:</strong> {new Date(formDetails.createdAt).toLocaleDateString()}</p>
+                    <p className='crt'><strong>Created At:</strong> {new Date(formDetails.createdAt).toLocaleDateString()}</p>
                 </div>
             )}
 

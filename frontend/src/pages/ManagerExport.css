@@ -59,15 +59,28 @@
 
 .manager-export .form-details {
     margin-top: 20px;
-    padding: 40px;
+    padding: 10px;
     background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(5, 129, 187, 0.1);
 }
 
 .manager-export .form-details h3 {
-    font-size: 2rem;
-    color: black;
+    font-size: 1.4rem;
+    color: rgb(160, 160, 160);
+    text-align: start;
+}
+.manager-export .form-details .tit{
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    padding: 10px;
+
+}
+.manager-export .form-details .crt{
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    text-align: end;
 }
 
 .manager-export .form-details .strong {
@@ -132,6 +145,7 @@
 
     .manager-export .form-details h3 {
         font-size: 1.5rem;
+     
     }
 }
 

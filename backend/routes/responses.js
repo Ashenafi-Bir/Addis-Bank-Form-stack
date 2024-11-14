@@ -5,8 +5,8 @@ const { Parser } = require('json2csv');
 const { v4: uuidv4 } = require('uuid');  
 
 // Import uuid to generate unique submission IDs
-
-router.post('/', async (req, res) => {  // Removed formSubmissionLimiter middleware
+// Submit Responses with Unique Submission ID
+router.post('/', async (req, res) => {
     const { formId, responses } = req.body;
     const submissionId = uuidv4();  // Generate a unique submission ID
 
@@ -25,9 +25,17 @@ router.post('/', async (req, res) => {  // Removed formSubmissionLimiter middlew
     }
 });
 
+
 // Export responses as CSV with question headers and submission rows
 router.get('/export/:formId', async (req, res) => {
     const { formId } = req.params;
+
+    // Check if the form exists
+    const form = await db.Form.findByPk(formId);
+    if (!form) {
+        return res.status(404).json({ error: 'Form not found' });
+    }
+
     try {
         // Fetch all questions for the form to use as headers
         const questions = await db.Question.findAll({
@@ -44,22 +52,44 @@ router.get('/export/:formId', async (req, res) => {
         // Fetch all responses for the form
         const responses = await db.Response.findAll({
             where: { formId },
-            attributes: ['questionId', 'answer', 'createdAt']
+            attributes: ['questionId', 'answer', 'submissionId', 'createdAt']
         });
 
-        // Group responses by submission time
-        const groupedResponses = {};
-        responses.forEach(response => {
-            const timestamp = response.createdAt.getTime();
-            if (!groupedResponses[timestamp]) groupedResponses[timestamp] = {};
-            groupedResponses[timestamp][questionMap[response.questionId]] = response.answer;
-        });
+        // Group responses by submissionId
+        const groupedResponses = responses.reduce((groups, response) => {
+            const { submissionId, questionId, answer, createdAt } = response;
+            if (!groups[submissionId]) {
+                groups[submissionId] = {
+                    submissionId,
+                    createdAt,
+                    answers: {}
+                };
+            }
+            groups[submissionId].answers[questionId] = answer;
+            return groups;
+        }, {});
 
-        // Prepare CSV headers and rows
-        const csvHeaders = Object.values(questionMap);  // Question texts as headers
-        const csvRows = Object.values(groupedResponses).map(response =>
-            csvHeaders.map(header => response[header] || "")  // Fill each row with answers or empty strings
-        );
+        // Prepare CSV headers
+        const csvHeaders = ['Submission ID', 'Timestamp', ...Object.values(questionMap)];  // Include Submission ID and Timestamp as headers
+
+        // Prepare CSV rows, one row per submission
+        const csvRows = Object.values(groupedResponses).map(group => {
+            const { submissionId, createdAt, answers } = group;
+            const row = new Array(csvHeaders.length).fill(''); // Initialize an empty row with the same length as the headers
+            
+            // Set Submission ID and Timestamp at the first columns (index 0 and 1)
+            row[0] = submissionId; // Submission ID
+            row[1] = createdAt.toISOString(); // Timestamp in ISO format
+
+            // Add answers to the corresponding columns for each question
+            Object.keys(answers).forEach(questionId => {
+                const questionText = questionMap[questionId];
+                const questionIndex = csvHeaders.indexOf(questionText);
+                row[questionIndex] = answers[questionId];
+            });
+
+            return row;
+        });
 
         // Add headers as the first row
         csvRows.unshift(csvHeaders);
@@ -73,6 +103,7 @@ router.get('/export/:formId', async (req, res) => {
         res.attachment(`form_${formId}_responses.csv`);
         res.send(csvData);
     } catch (error) {
+        console.error(error);
         res.status(500).json({ error: error.message });
     }
 });

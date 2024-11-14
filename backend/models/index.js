@@ -19,4 +19,8 @@ db.Question.belongsTo(db.Form, { foreignKey: "formId", onDelete: "SET NULL", onU
 db.Question.hasMany(db.Response, { as: "responses", foreignKey: "questionId" });
 db.Response.belongsTo(db.Question, { foreignKey: "questionId", onDelete: "CASCADE", onUpdate: "CASCADE" });
 
+// Create a relationship between `Response` and a new `Submission` model if needed
+// Example:
+// db.Response.belongsTo(db.Submission, { foreignKey: 'submissionId' });
+
 module.exports = db;
