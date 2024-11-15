@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import HomePage from './HomePage';
 import AdminFormCreator from './AdminFormCreator';
@@ -8,6 +7,7 @@ import AdminFormEditor from './AdminFormEditor';
 import ManagerExport from './ManagerExport';
 import Header from '../componenets/common/Header/Header';
 import Footer from '../componenets/common/Footer/Footer';
+import './Main.css'
 
 const PrivateRoute = ({ children }) => {
   const token = localStorage.getItem('token');
@@ -16,19 +16,20 @@ const PrivateRoute = ({ children }) => {
 
 const MainPage = () => {
   return (
-    <>
-      <Header/>
-      <Routes>
-      {/* Protected Routes */}
-                <Route path="/manage" element={<PrivateRoute><HomePage/></PrivateRoute>} />
-                <Route path="/create-form" element={<PrivateRoute><AdminFormCreator /></PrivateRoute>} />
-                <Route path="/admin/forms" element={<PrivateRoute><AdminFormList /></PrivateRoute>} />
-                <Route path="/admin/form/:formId" element={<PrivateRoute><AdminFormEditor /></PrivateRoute>} />
-                <Route path="/export" element={<PrivateRoute><ManagerExport /></PrivateRoute>} />
-      
-      </Routes>
+    <div className="main-page-container">
+      <Header />
+      <div className="content-container">
+        <Routes>
+          {/* Protected Routes */}
+          <Route path="/manage" element={<PrivateRoute><HomePage /></PrivateRoute>} />
+          <Route path="/create-form" element={<PrivateRoute><AdminFormCreator /></PrivateRoute>} />
+          <Route path="/admin/forms" element={<PrivateRoute><AdminFormList /></PrivateRoute>} />
+          <Route path="/admin/form/:formId" element={<PrivateRoute><AdminFormEditor /></PrivateRoute>} />
+          <Route path="/export" element={<PrivateRoute><ManagerExport /></PrivateRoute>} />
+        </Routes>
+      </div>
       <Footer />
-    </>
+    </div>
   );
 };
 
