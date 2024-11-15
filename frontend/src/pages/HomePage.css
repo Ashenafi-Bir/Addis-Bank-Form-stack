@@ -2,96 +2,65 @@
 
 /* Overall container */
 .home-container {
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    align-items: center;
-    height: 90vh;
-    background-color: #f4f7f6;
-    text-align: center;
-    padding: 20px;
-  }
-  
-  /* Hero Section */
-  .hero-section {
-    margin-bottom: 30px;
-  }
-  
-  .hero-title {
-    font-size: 36px;
-    font-weight: bold;
-    color: var(--primary-color);
-    margin-bottom: 10px;
-    margin-top: 50px;
-  }
-  
-  .hero-description {
-    font-size: 18px;
-    color: #333;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  /* Button container */
-  .button-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  
-  /* Button Styling */
-  .home-button {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    padding: 15px 30px;
-    text-decoration: none;
-    font-size: 18px;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, background-color 0.3s ease;
-  }
-  
-  .home-button:hover {
-    background-color: #2f5e7e;
-    transform: scale(1.05);
-  }
-  
-  .home-button:active {
-    transform: scale(1);
-  }
-  
-  /* Media Queries for Responsiveness */
-  @media (max-width: 768px) {
-    .hero-title {
-      font-size: 28px;
-    }
-  
-    .hero-description {
-      font-size: 16px;
-    }
-  
-    .home-button {
-      padding: 12px 25px;
-      font-size: 16px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .hero-title {
-      font-size: 24px;
-    }
-  
-    .hero-description {
-      font-size: 14px;
-    }
-  
-    .home-button {
-      padding: 10px 20px;
-      font-size: 14px;
-    }
-  }
-  /* HomePage.css */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh; /* Full height */
+  background-color: #f4f7f6;
+  text-align: center;
+  /* padding: 20px; */
+}
+
+/* Hero Section with Background Image */
+.hero-section {
+  margin-bottom: 30px;
+  width: 100%;
+  height: 40%; /* Adjust height based on preference */
+  background-image: url('../assets/Images/login_background.jfif'); /* Replace with your actual image path */
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  color: white; /* Ensures text is visible on top of the image */
+}
+
+/* Add a semi-transparent overlay for better text visibility */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1); /* Dark overlay */
+  z-index: 1;
+}
+
+.hero-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-top: 50px;
+  z-index: 2; /* Make sure text is above the overlay */
+  color: var(--primary-color);
+  background-color: var(--secondary-color);
+}
+
+.hero-description {
+  font-size: 18px;
+  max-width: 600px;
+  margin: 0 auto;
+  color: var(--secondary-color);
+  z-index: 2; /* Make sure text is above the overlay */
+  background-color: var(--primary-color);
+}
+
+/* Button container */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  z-index: 2; /* Make sure buttons are above the overlay */
+}
 
 /* Button Styling */
 .home-button {
@@ -108,7 +77,6 @@
   gap: 10px; /* Space between the icon and text */
 }
 
-/* Hover and Active Button States */
 .home-button:hover {
   background-color: #2f5e7e;
   transform: scale(1.05);
@@ -120,15 +88,31 @@
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
+  .hero-title {
+      font-size: 28px;
+  }
+
+  .hero-description {
+      font-size: 16px;
+  }
+
   .home-button {
-    padding: 12px 25px;
-    font-size: 16px;
+      padding: 12px 25px;
+      font-size: 16px;
   }
 }
 
 @media (max-width: 480px) {
+  .hero-title {
+      font-size: 24px;
+  }
+
+  .hero-description {
+      font-size: 14px;
+  }
+
   .home-button {
-    padding: 10px 20px;
-    font-size: 14px;
+      padding: 10px 20px;
+      font-size: 14px;
   }
 }

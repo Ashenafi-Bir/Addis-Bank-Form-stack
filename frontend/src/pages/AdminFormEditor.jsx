@@ -69,9 +69,9 @@ const AdminFormEditor = ({ formId }) => {
 
     return (
         <div className="admin-form-editor">
-            <h1>Edit Questioner</h1>
+            <h1>Edit questionnaire</h1>
             <div className="form-container">
-                <label htmlFor="title">Questioner Title</label>
+                <label htmlFor="title">questionnaire Title</label>
                 <input
                     id="title"
                     type="text"
@@ -80,7 +80,7 @@ const AdminFormEditor = ({ formId }) => {
                     onChange={(e) => setTitle(e.target.value)}
                 />
 
-                <label htmlFor="description">Questioner Description</label>
+                <label htmlFor="description">questionnaire Description</label>
                 <textarea
                     id="description"
                     placeholder="Form Description"
@@ -133,7 +133,7 @@ const AdminFormEditor = ({ formId }) => {
 
             {successMessage && <p className="success-message">{successMessage}</p>}
             {errorMessage && <p className="error-message">{errorMessage}</p>}
-            <button onClick={() => navigate(-1)}>Back to Questioners</button>
+            <button onClick={() => navigate(-1)}>Back to questionnaires</button>
         </div>
     );
 };

@@ -63,9 +63,9 @@ const ManagerExport = () => {
 
     return (
         <div className="manager-export">
-            <h2>Export Form Responses</h2>
+            <h2>Export questionnaire Responses</h2>
             <div className="input-container">
-                <label htmlFor="formId">Form ID</label>
+                <label htmlFor="formId">questionnaire ID</label>
                 <div className="input-with-icon">
                     <input
                         type="text"
@@ -84,7 +84,7 @@ const ManagerExport = () => {
 
             {isDetailsVisible && formDetails && (
                 <div className="form-details">
-                    <h3>Form Details</h3>
+                    <h3>questionnaire Details</h3>
                     <p className="tit"><strong>Title:</strong> {formDetails.title}</p>
                     <p><strong>Number of Questions:</strong> {formDetails.questions.length}</p>
                     <p className="crt"><strong>Created At:</strong> {new Date(formDetails.createdAt).toLocaleDateString()}</p>

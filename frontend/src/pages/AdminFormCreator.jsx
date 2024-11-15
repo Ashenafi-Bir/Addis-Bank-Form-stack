@@ -39,19 +39,19 @@ const AdminFormCreator = () => {
       <h1>Admin Dashboard</h1>
       <div>
         <button onClick={() => setActiveTab('create')}>
-          <FontAwesomeIcon icon={faFileAlt} /> Create Questioner
+          <FontAwesomeIcon icon={faFileAlt} /> Create questionnaire
         </button>
         <button onClick={() => setActiveTab('list')}>
-          <FontAwesomeIcon icon={faList} /> View All Questioners
+          <FontAwesomeIcon icon={faList} /> View All questionnaire
         </button>
       </div>
 
       {activeTab === 'create' && (
         <div className="form-container">
-          <h2>Create Questioner</h2>
+          <h2>Create questionnaire</h2>
           <input className='title'
             type="text" 
-            placeholder="Questioners Title" 
+            placeholder="questionnaire Title" 
             value={title} 
             onChange={e => setTitle(e.target.value)} 
           />
@@ -90,7 +90,7 @@ const AdminFormCreator = () => {
             <FontAwesomeIcon icon={faPlus} /> Add Question
           </button>
           <button className="create-form-btn" onClick={handleCreateForm}>
-            <FontAwesomeIcon icon={faFileAlt} /> Create Questioner
+            <FontAwesomeIcon icon={faFileAlt} /> Create questionnaire
           </button>
 
           {successMessage && <p className="success-message">{successMessage}</p>}

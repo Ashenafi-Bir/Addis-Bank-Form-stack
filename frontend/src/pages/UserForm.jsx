@@ -36,10 +36,10 @@ const UserForm = () => {
     };
 
     if (isSubmitted) {
-        return <p className="success-message">Your form has been submitted successfully!</p>;
+        return <p className="success-message">Your questionnaire has been submitted successfully!</p>;
     }
 
-    if (!form) return <p>Loading form...</p>;
+    if (!form) return <p>Loading questionnaire...</p>;
 
     return (
         <div className="container-me">

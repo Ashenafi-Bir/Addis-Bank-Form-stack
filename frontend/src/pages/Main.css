@@ -1,0 +1,19 @@
+/* Main page container */
+.main-page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure it takes full screen height */
+  }
+  
+  /* Content container (where the main content of the page will go) */
+  .content-container {
+    flex: 1; /* Takes up remaining space */
+    padding: 20px;
+    background-color: #f9f9f9; /* Or any background color you prefer */
+  }
+  
+  /* Footer */
+  footer {
+    margin-top: auto; /* Ensures footer is at the bottom */
+  }
+  

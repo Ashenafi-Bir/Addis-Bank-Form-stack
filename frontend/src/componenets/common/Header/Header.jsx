@@ -16,7 +16,7 @@ function Header() {
   };
 
   return (
-    <header className="header">
+    <header className="headerz">
       <div className="logo">
         <Link to="/manage">
           <img src={logo} alt="Addis Bank" className="footer-logo" />

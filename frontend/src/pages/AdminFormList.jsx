@@ -52,7 +52,7 @@ const AdminFormList = ({ onSelectForm }) => {
     return (
         <div className="admin-form-list">
             {errorMessage && <p className="error-message">{errorMessage}</p>}
-            <h1 className="form-list-title">All Questioners List</h1>
+            <h1 className="form-list-title">All questionnaires List</h1>
             <ul className="form-list">
                 {forms.map((form, index) => (
                     <li key={form.id} className="form-list-item">
