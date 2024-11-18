@@ -125,7 +125,186 @@
 .copy-link-btn:hover {
   opacity: 0.8;
 }
+/* Confirmation/Error Message Box */
+.message-box {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  padding: 15px 25px;
+  border-radius: 5px;
+  font-size: 1.4rem;
+  z-index: 1000;
+  color: var(--secondary-color);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
 
+.message-box.success {
+  background-color: #2ecc71;
+}
+
+.message-box.error {
+  background-color: #e74c3c;
+}
+
+/* Modal Styling */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+ right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.modal {
+  background-color: white;
+  padding: 25px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.modal h3 {
+  font-size: 1.6rem;
+  color: #333;
+}
+
+.modal-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.confirm-btn, .cancel-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+}
+
+.confirm-btn {
+  background-color: #2ecc71;
+  color: var(--secondary-color);
+}
+
+.confirm-btn:hover {
+  background-color: #27ae60;
+}
+
+.cancel-btn {
+  background-color: #e74c3c;
+  color: var(--secondary-color);
+}
+
+.cancel-btn:hover {
+  background-color: #c0392b;
+}
+
+/* Other existing styles */
+.admin-form-list {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif;
+}
+
+.admin-form-list .form-list-title {
+  color: var(--primary-color);
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.admin-form-list .form-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.admin-form-list .form-list-item {
+  background-color: #f9f9f9;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Row 1: Form Number, Title, Buttons */
+.form-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-right: 20px;
+}
+
+.form-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* Buttons */
+.admin-form-list .edit-form-btn,
+.admin-form-list .delete-form-btn,
+.admin-form-list .generate-link-btn {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.admin-form-list .edit-form-btn:hover {
+  background-color: #2980b9;
+}
+
+.admin-form-list .delete-form-btn {
+  background-color: #e74c3c;
+}
+
+.admin-form-list .delete-form-btn:hover {
+  background-color: #c0392b;
+}
+
+.generate-link-btn {
+  background-color: #2ecc71;
+}
+
+.generate-link-btn:hover {
+  opacity: 0.8;
+}
+
+/* Row 2: Generated Link */
+.generated-link-row {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px
+}
 /* Responsive Design */
 @media (max-width: 768px) {
   .admin-form-list {

@@ -81,7 +81,64 @@
   .admin-form-editor .error-message {
     color: red;
   }
-  
+  /* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 300px;
+}
+
+.modal-actions button {
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 1rem;
+}
+
+.confirm-btn {
+  background-color: green;
+  color: var(--primary-color);
+}
+
+.cancel-btn {
+  background-color: red;
+  color: var(--primary-color);
+}
+
+/* Success/Error Popup Styles */
+.popup {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1.4rem;
+  width: 300px;
+}
+
+.success {
+  background-color: #2ecc71;
+  color: var(--secondary-color);
+}
+
+.error {
+  background-color: red;
+  color: var(--secondary-color);;
+}
+
   /* Responsive Design */
   @media (max-width: 768px) {
     .admin-form-editor {
