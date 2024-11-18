@@ -1,4 +1,3 @@
-// UserForm.js
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchFormData, submitFormResponses } from '../services/formService';
@@ -9,6 +8,7 @@ const UserForm = () => {
     const [form, setForm] = useState(null);
     const [responses, setResponses] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     // Fetch form data
     useEffect(() => {
@@ -20,16 +20,38 @@ const UserForm = () => {
     const handleChange = (questionId, value) => {
         setResponses({
             ...responses,
-            [questionId]: value,
+            [questionId]: value,  // Update the response for the given question
         });
+    };
+
+    // Validate the form before submission
+    const validateForm = () => {
+        for (let question of form.questions) {
+            // If the question type is "short" or "radio", ensure it's answered
+            if ((question.type === "short" || question.type === "radio") && !responses[question.id]) {
+                return false;
+            }
+
+            // For checkbox, allow none to be selected (no requirement to select any checkbox)
+            if (question.type === "checkbox" && responses[question.id] === undefined) {
+                return false;
+            }
+        }
+        return true;
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Validate before submission
+        if (!validateForm()) {
+            setErrorMessage("Please answer all required questions.");
+            return;
+        }
+
         try {
             await submitFormResponses(formId, responses);
-            alert("Form submitted successfully!");
-            setIsSubmitted(true);
+            setIsSubmitted(true); // Form submitted successfully
         } catch (error) {
             console.error("Error submitting form:", error);
         }
@@ -46,6 +68,10 @@ const UserForm = () => {
             <div className="form-container1">
                 <h2>{form.title}</h2>
                 {form.description && <p className="form-description">{form.description}</p>}
+                
+                {/* Display error message if any */}
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
+
                 <form onSubmit={handleSubmit}>
                     {form.questions.map((question, index) => (
                         <div key={question.id} className="question-container">
@@ -53,7 +79,7 @@ const UserForm = () => {
                                 <span className="question-number">{index + 1}.</span>
                                 {question.questionText}
                             </label>
-                            
+
                             {/* Display subdescription if available */}
                             {question.subdescription && (
                                 <p className="subdescription">{question.subdescription}</p>
@@ -74,7 +100,7 @@ const UserForm = () => {
                                         <label key={index} className="option-label">
                                             <input
                                                 type="radio"
-                                                name={`question_${question.id}`}
+                                                name={`question_${question.id}`} // Ensure each radio group has a unique name
                                                 value={option}
                                                 checked={responses[question.id] === option}
                                                 onChange={(e) => handleChange(question.id, e.target.value)}
@@ -101,7 +127,6 @@ const UserForm = () => {
                                                         : selectedOptions.filter(opt => opt !== option)
                                                     );
                                                 }}
-                                                required
                                             />
                                             {option}
                                         </label>

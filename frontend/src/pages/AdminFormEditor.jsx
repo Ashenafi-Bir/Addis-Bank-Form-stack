@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchForm, updateForm, deleteQuestion } from '../services/formService';
+import { fetchForm, updateForm } from '../services/formService';
 import './AdminFormEditor.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,8 +9,7 @@ const AdminFormEditor = ({ formId }) => {
     const [questions, setQuestions] = useState([]);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [showDeleteModal, setShowDeleteModal] = useState(false); // To show the delete confirmation modal
-    const [questionToDelete, setQuestionToDelete] = useState(null); // Store question to delete
+    const [showSaveModal, setShowSaveModal] = useState(false); // Save confirmation modal state
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -46,20 +45,7 @@ const AdminFormEditor = ({ formId }) => {
 
     const addQuestion = () => setQuestions([...questions, { text: '', type: 'short', options: [] }]);
 
-    const deleteQuestionHandler = async () => {
-        const result = questionToDelete ? await deleteQuestion(questionToDelete) : { success: true };
-
-        if (result.success) {
-            setQuestions((prevQuestions) => prevQuestions.filter((q) => q.id !== questionToDelete));
-            setSuccessMessage('Question deleted successfully.');
-        } else {
-            setErrorMessage(result.message);
-        }
-        setShowDeleteModal(false);
-        setTimeout(() => setSuccessMessage(''), 3000); // Clear success message after 3 seconds
-    };
-
-    const updateFormHandler = async () => {
+    const confirmSaveHandler = async () => {
         const result = await updateForm(formId, title, description, questions);
         if (result.success) {
             setSuccessMessage(result.message);
@@ -67,6 +53,7 @@ const AdminFormEditor = ({ formId }) => {
         } else {
             setErrorMessage(result.message);
         }
+        setShowSaveModal(false);
     };
 
     return (
@@ -124,31 +111,23 @@ const AdminFormEditor = ({ formId }) => {
                                 />
                             </>
                         )}
-
-                        {/* <button className="delete-question-btn" onClick={() => {
-                            setQuestionToDelete(q.id);
-                            setShowDeleteModal(true);
-                        }}>
-                            Delete Question
-                        </button> */}
                     </div>
                 ))}
 
                 <button className="add-question-btn" onClick={addQuestion}>Add Question</button>
-                <button className="create-form-btn" onClick={updateFormHandler}>Save Changes</button>
+                <button className="create-form-btn" onClick={() => setShowSaveModal(true)}>Save Changes</button>
             </div>
 
             {successMessage && <div className="popup success">{successMessage}</div>}
             {errorMessage && <div className="popup error">{errorMessage}</div>}
 
-            {/* Confirmation Modal for Deleting Question */}
-            {showDeleteModal && (
+            {showSaveModal && (
                 <div className="modal-overlay">
                     <div className="modal">
-                        <h3>Are you sure you want to delete this question?</h3>
+                        <h3>Are you sure you want to save these changes?</h3>
                         <div className="modal-actions">
-                            <button className="confirm-btn" onClick={deleteQuestionHandler}>Yes, Delete</button>
-                            <button className="cancel-btn" onClick={() => setShowDeleteModal(false)}>Cancel</button>
+                            <button className="confirm-btn" onClick={confirmSaveHandler}>Yes, Save</button>
+                            <button className="cancel-btn" onClick={() => setShowSaveModal(false)}>Cancel</button>
                         </div>
                     </div>
                 </div>
