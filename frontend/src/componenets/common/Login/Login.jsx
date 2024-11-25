@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
-import logo from '../../../assets/general/new.png';
+import logo from '../../../assets/general/AdibLogo.png';
 import image2 from '../../../assets/Images/bg.jfif';
 import { login } from '../../../services/userService';
 

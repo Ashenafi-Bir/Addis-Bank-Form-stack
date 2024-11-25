@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.css';
 import { Link, useNavigate } from 'react-router-dom';
-import logo from '../../../assets/general/logo12.png';
+import logo from '../../../assets/general/AdibLogo.png';
 
 function Header() {
   const navigate = useNavigate(); // For programmatic navigation

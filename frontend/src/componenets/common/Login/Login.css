@@ -41,8 +41,8 @@
 }
 
 .login-container .form-section h1 {
-  font-size: 2rem;
-  color: var(--secondary-color);
+  font-size: 1.6rem;
+  color: var(--primary-color);
 }
 
 
@@ -102,12 +102,13 @@
   color: var(--primary-color);
 }
 
-/* Error message styling */
-.login-container .error {
-  color: red;
+/* Error message styling */.login-container .error {
+  color: var(--secondary-color);
   font-size: 1.2rem;
   margin-bottom: 10px;
+  padding: 5px;
 }
+
 .login-container .log{
   text-align: center;
   padding-left: 170px;
